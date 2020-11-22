@@ -5,6 +5,7 @@ class Doctor(BaseModel):
     name: str = ''
     email: str = ''
     password: str = ''
+    token:str = ''
 
 class DoctorLog(BaseModel):
     email: str = ''
