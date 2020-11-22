@@ -1,4 +1,4 @@
-from models import userModels, patientModel, consultationModel
+from models import doctorModels, patientModel, consultationModel
 from deta import Deta
 import os
 
@@ -10,7 +10,7 @@ dbConsultations = deta.Base('consultations')
 
 # doctor actions
 
-async def add_doctor(doctor:userModels.Doctor):
+async def add_doctor(doctor:doctorModels.Doctor):
     newDoctor = dbDoctors.put({
         key: value for key, value in doctor
     }, key=doctor.email)
@@ -22,7 +22,7 @@ async def update_doctor_token(email:str, token:str):
         'token': token
     }, key=email)
 
-async def update_doctor_data(doctor:userModels.DoctorData):
+async def update_doctor_data(doctor:doctorModels.DoctorData):
     dbDoctors.update({
         key: value for key, value in doctor
     }, key=doctor.email)
@@ -32,7 +32,7 @@ async def update_doctor_password(email:str, newPassword:str):
         'password': newPassword
     }, key=email)
 
-async def get_doctor(doctor:userModels.DoctorLog):
+async def get_doctor(doctor:doctorModels.DoctorLog):
     # El formato en que son devueltos los datos es una lista como esta: [{datos...}, {datos...}, ...]
     
     return next(dbDoctors.fetch({
@@ -46,3 +46,4 @@ async def get_doctor_by_token(token:str):
     return next(dbDoctors.fetch({
         'token': token
     }))[0]
+
