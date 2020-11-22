@@ -1,7 +1,7 @@
 click==7.1.2
+deta==0.7
 fastapi==0.61.2
 h11==0.11.0
-peewee==3.14.0
 pydantic==1.7.2
 starlette==0.13.6
 uvicorn==0.12.2
