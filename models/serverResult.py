@@ -1,4 +1,4 @@
-class Result:
+class ServerResult:
 
     response = ''
     ok = True
