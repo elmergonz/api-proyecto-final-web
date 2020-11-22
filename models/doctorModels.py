@@ -23,10 +23,3 @@ class DoctorLog(Base):
 class DoctorData(Base):
     name: Optional[str] = None
     email: Optional[str] = None
-
-p = Doctor()
-
-p['token'] = '123456'
-
-for i in p:
-    print(i)

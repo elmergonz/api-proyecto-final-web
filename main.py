@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-app.include_router(doctor, tags=['Doctor'])
+app.include_router(doctor.router, tags=['Doctor'])
 
 @app.get('/api', tags=['Inicio'])
 async def get_root():

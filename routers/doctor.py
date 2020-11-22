@@ -1,4 +1,4 @@
-from models.doctorModels import *
+from models.doctorModels import Doctor, DoctorData, DoctorLog
 from models.serverResult import ServerResult
 from db import dbdata
 
