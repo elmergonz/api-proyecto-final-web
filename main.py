@@ -8,7 +8,7 @@ import uvicorn
 app = FastAPI(
     title='medicos',
     verson='1.0',
-    docs_url='/'
+    docs_url='/docs'
 )
 
 app.add_middleware(
