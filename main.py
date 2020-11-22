@@ -1,7 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
-from routers import user
+from routers import doctor
 
 import uvicorn
 
@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-app.include_router(user, tags=['User'])
+app.include_router(doctor, tags=['Doctor'])
 
 @app.get('/api', tags=['Inicio'])
 async def get_root():
