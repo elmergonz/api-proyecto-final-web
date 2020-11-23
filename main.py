@@ -1,14 +1,14 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
-from routers import doctor
+from routers import doctor, patient, consultation
 
 import uvicorn
 
 app = FastAPI(
-    title='medicos',
+    title='api medicos',
     verson='1.0',
-    docs_url='/docs'
+    docs_url='/docs',
 )
 
 app.add_middleware(
@@ -19,14 +19,17 @@ app.add_middleware(
 )
 
 app.include_router(doctor.router, tags=['Doctor'])
+app.include_router(patient.router, tags=['Patient'])
+app.include_router(consultation.router, tags=['Consultation'])
 
-@app.get('/api', tags=['Inicio'])
+@app.get('/', tags=['Home'])
+@app.get('/api', tags=['Home'])
 async def get_root():
     return {
         'api': 'proyecto final :D',
-        'docs': 'https://dj21vc.deta.dev' + app.docs_url
+        'docs': 'https://dgon3z.deta.dev' + app.docs_url
     }
 
 if __name__ == "__main__":
     
-    uvicorn.run(app)
+    uvicorn.run('main:app', reload=True)

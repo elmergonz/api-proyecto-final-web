@@ -4,14 +4,14 @@ from pydantic import BaseModel
 from typing import Optional
 
 class Consultation(BaseModel):
-    patient: Patient = None
-    insuranceNumber: str = ''
+    patientCedula: str = ''
+    insuranceNumber: str = '' # numero de seguro
     date: str = ''
-    amount: float = ''
+    amount: float = 0.0
 
-    # -- optionals: Estas son las caracteristicas que se pueden editar  --
+    # -- optionals: Estas son las caracteristicas que se deberian editar  --
 
-    reason: Optional[str] = None
-    diagnose: Optional[str] = None
-    note: Optional[str] = None
-    foto: Optional[str] = None
+    reason: str = ''
+    diagnose: str = ''
+    note: str = ''
+    foto: str = ''
