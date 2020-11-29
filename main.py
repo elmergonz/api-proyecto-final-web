@@ -10,7 +10,7 @@ import os
 
 app = FastAPI(
     title='api medicos',
-    verson='1.0',
+    verson='2.1',
     docs_url='/docs',
 )
 
