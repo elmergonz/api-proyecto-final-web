@@ -1,9 +1,12 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
-from routers import doctor, patient, consultation
+from routes import doctor, patient, consultation
 
 import uvicorn
+
+import multiprocessing as mul
+import os
 
 app = FastAPI(
     title='api medicos',

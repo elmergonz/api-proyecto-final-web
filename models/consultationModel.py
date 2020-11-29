@@ -1,9 +1,7 @@
-from models.patientModel import Patient
-
-from pydantic import BaseModel
+from models.baseModel import Base
 from typing import Optional
 
-class Consultation(BaseModel):
+class Consultation(Base):
     patientCedula: str = ''
     insuranceNumber: str = '' # numero de seguro
     date: str = ''
