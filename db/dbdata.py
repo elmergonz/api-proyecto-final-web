@@ -64,26 +64,28 @@ async def is_doctor_logged_in(token:str):
 async def add_patient(patient:patientModel.Patient):
     newPatient = dbPatients.put({
         key: value for key, value in patient
-    }, key=patient.cedula)
+    })
 
     return newPatient
 
 async def update_patient_data(patient:patientModel.Patient):
     dbPatients.update({
-        key: value for key, value in patient if value
-    }, key=patient.cedula)
+        key: value for key, value in patient if key != 'key' and value
+    }, key=patient['key'])
 
 async def get_patients(email:str):
     return next(dbPatients.fetch({'doctorEmail': email}))
 
-async def get_patient_by_cedula(cedula:str):
-    return dbPatients.get(cedula)
+async def get_patient_by_cedula(cedula:str, email:str):
+    patient = next(dbPatients.fetch({'cedula': cedula, 'doctorEmail': email}))
 
-async def patient_exist(cedula:str):
-    return True if dbPatients.get(cedula) else False
+    return patient[0] if patient else patient
 
-async def delete_patient(cedula:str):
-    return dbPatients.delete(cedula)
+async def patient_exist(cedula:str, email:str):
+    return True if await get_patient_by_cedula(cedula, email) else False
+
+async def delete_patient(key:str):
+    return dbPatients.delete(key)
 
 # ------ consultation actions
 
@@ -94,16 +96,16 @@ async def add_consultation(consult:consultationModel.Consultation):
 
     return newConsult
 
-async def update_consultation_data(consult:consultationModel.Consultation):
+async def update_consultation_data(consult:consultationModel.Consultation, consultId:str):
     dbConsultations.update({
         key: value for key, value in consult if value
-    })
+    }, key=consultId)
 
 async def get_consultations_by_doctor(doctorEmail:str):
     return next(dbConsultations.fetch({'doctorEmail': doctorEmail}))
 
-async def get_consultations_by_patient(cedula:str):
-    return next(dbConsultations.fetch({'paritentCedula': cedula})), await get_patient_by_cedula(cedula)
+async def get_consultations_by_patient(cedula:str, email:str):
+    return next(dbConsultations.fetch({'patientCedula': cedula, 'doctorEmail': email})), await get_patient_by_cedula(cedula, email)
 
 async def consultation_exist(key:str):
     return True if dbConsultations.get(key) else False
